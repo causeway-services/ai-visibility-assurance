@@ -1,0 +1,31 @@
+{
+  "id": "ai-visibility-audit-fulfillment-v0",
+  "status": "mock-client-protocol",
+  "input": "accepted scope packet from the offer surface",
+  "steps": [
+    {"id":"admit","action":"Verify the target is public or explicitly authorized, scope is answerable, launch/payment rules match client role, and no required evidence surface is falsely assumed accessible.","output":"admission or explicit refusal"},
+    {"id":"question-set","action":"Turn the customer's natural buyer question into a small versioned query set containing direct, comparative, category, factual, and brand/entity variants without manufacturing hundreds of prompt-shaped queries.","output":"versioned query set with intent labels"},
+    {"id":"canonical-facts","action":"Record the facts the customer says a useful answer must get right, then identify public first-party evidence and material contradictions.","output":"canonical fact/evidence register"},
+    {"id":"technical-baseline","action":"Inspect crawl/index eligibility, canonical URLs, entity-disambiguation signals, structured data consistency, and obvious public technical blockers.","output":"technical findings with observed evidence"},
+    {"id":"answer-surface-baseline","action":"Run the accepted sampled query set across accessible major search/AI-answer surfaces, recording exact query, date, surface/context, mention, citations, prominence, and factuality rather than a synthetic single score.","output":"normalized observation ledger"},
+    {"id":"materiality","action":"Relate observed failures to the customer's stated consequence and conversion path. Distinguish missing visibility from failures that plausibly matter commercially.","output":"materiality findings"},
+    {"id":"substitutes","action":"Compare do-nothing, self-service, current provider/tool, cheap monitoring, one-time remediation, and ongoing monitoring against the actual finding.","output":"least-cost alternative matrix"},
+    {"id":"recommend","action":"Return a stage-specific recommendation with uncertainty and falsification conditions. 'No paid action warranted' is valid.","output":"decision memo + prioritized backlog"},
+    {"id":"deliver","action":"Expose observations, evidence, interpretation, recommendation, and machine-readable artifacts to the customer on the same offer surface.","output":"inspectable deliverable"},
+    {"id":"settle","action":"Accept, record a bounded correction/revision request, or record a dispute about scope/evidence. Silence is not acceptance.","output":"acceptance/revision receipt"}
+  ],
+  "evidenceRules": [
+    "observation and interpretation are separate fields",
+    "inaccessible model internals are never inferred",
+    "screenshots or citations are retained when the surface permits",
+    "time-sensitive results carry observation timestamps",
+    "entity confusion is recorded explicitly rather than folded into a low score",
+    "commercial materiality is tied to the customer's stated consequence, not assumed"
+  ],
+  "stopConditions": [
+    "scope cannot be answered with accessible lawful evidence",
+    "customer asks to stop",
+    "evidence shows the paid audit is disproportionate and a cheaper path is sufficient",
+    "high-stakes domain would require expertise or assurance beyond the charter"
+  ]
+}
