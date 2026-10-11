@@ -1,0 +1,57 @@
+{
+  "id": "ai-visibility-audit",
+  "type": "service-contract-draft",
+  "version": 1,
+  "status": "private-mock-client-only",
+  "customerOutcome": "The customer receives evidence sufficient to decide whether AI-mediated discovery or representation is materially failing them, what layer causes the failure, and the least costly warranted next action.",
+  "admission": {
+    "beginsWith": "customer concern, not a payment request",
+    "allowsTriageOut": true,
+    "requiresBeforePaidScope": [
+      "customer domain or public identity",
+      "one or more buyer questions",
+      "desired correct representation",
+      "material consequence if wrong or absent",
+      "current SEO/GEO tooling or provider context"
+    ]
+  },
+  "stages": [
+    "understand",
+    "qualify",
+    "scope",
+    "decide",
+    "buy",
+    "fulfill",
+    "inspect",
+    "accept",
+    "follow_up"
+  ],
+  "deliverables": [
+    "query-and-intent set",
+    "crawl/index and canonical-entity findings where observable",
+    "sampled AI/search retrieval, mention, citation, and factuality observations with provenance",
+    "competitor/substitute and evidence-source observations where relevant",
+    "conversion-path findings where measurable",
+    "layer-specific finding register",
+    "least-cost recommendation and prioritized backlog",
+    "explicit no-action recommendation when warranted"
+  ],
+  "exclusions": [
+    "guaranteed rankings or citations",
+    "ongoing implementation unless separately contracted",
+    "mass prompt-page generation",
+    "unverifiable claims about inaccessible model internals",
+    "subscription requirement"
+  ],
+  "pricing": {
+    "currency": "USD",
+    "provisionalFullAudit": 500,
+    "status": "unvalidated-during-mock-client-qa",
+    "rule": "Do not activate or publish a final price until mock-client value feedback, measured delivery cost, and substitute comparison are reviewed."
+  },
+  "payment": {
+    "provider": "Stripe",
+    "state": "disabled-private-pilot",
+    "activationRequires": "mock-client-launch-gate=open"
+  }
+}
