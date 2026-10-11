@@ -1,0 +1,22 @@
+{
+  "id": "ai-visibility-assurance",
+  "name": "AI Visibility Assurance",
+  "target": "A buyer can move from vague anxiety or curiosity about AI search to an evidence-backed decision about whether there is a material visibility problem, what layer causes it, and the least costly warranted next action.",
+  "boundary": [
+    "private mock-client QA until Leader approval",
+    "no external solicitation or external payment during the QA phase",
+    "no guaranteed ranking, citation, recommendation, or revenue claims",
+    "no fabricated measurements from inaccessible answer surfaces",
+    "no mass-produced prompt-shaped content as a substitute for useful evidence",
+    "no hidden subscription commitment",
+    "no default assumption that the customer needs the paid audit",
+    "no sale when the triage evidence says a free or cheaper alternative is sufficient"
+  ],
+  "allocation": "Use existing 561 Group research, web, measurement, payment, and agent capacity to build one end-to-end mock-client service loop; external cash risk is zero until the Leader launch gate; the existing USD 500 Stripe payment link remains disabled.",
+  "appraisal": "Morgan Sennhauser completes at least one end-to-end mock-client traversal; every objection and failure becomes a retained product requirement; the service can produce an inspectable evidence bundle, a least-cost recommendation, a fulfillment record, and an acceptance/revision state; price, scope, and labor are measured rather than assumed.",
+  "issued-to": "lead-operator",
+  "x-provenance": {
+    "issued-by": "Leader via CPO/CTO formation",
+    "recorded-on": "2026-10-03"
+  }
+}
