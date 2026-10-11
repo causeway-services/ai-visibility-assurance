@@ -1,0 +1,32 @@
+{
+  "id": "ai-visibility-assurance-feeling-rules",
+  "audienceState": [
+    "skeptical of a fast-moving marketing fad",
+    "uncertain whether AI search materially matters to their business",
+    "aware that cheaper subscription tools and existing SEO providers exist",
+    "afraid of wasting money more than afraid of missing a jargon trend",
+    "wants a concrete answer rather than another dashboard",
+    "may already feel behind or embarrassed by not understanding GEO/AEO"
+  ],
+  "interactionRules": [
+    "begin with the buyer's worry or decision, not our six-stage ontology",
+    "never imply urgency merely because AI search exists",
+    "normalize uncertainty and allow 'mostly curious' as a serious starting state",
+    "show cheaper tools, existing providers, and self-service as legitimate alternatives",
+    "make 'you do not need to buy this' an honorable successful outcome",
+    "show observations before scoring or interpretation",
+    "introduce AEO/GEO acronyms only after plain-language orientation",
+    "explain what the customer is paying us to decide that a subscription dashboard cannot decide alone",
+    "state fixed scope, data handling, correction path, and price before payment",
+    "avoid subscription traps and dark-pattern continuity",
+    "preserve customer agency at every transition; a recommendation is not a forced next step"
+  ],
+  "prohibitedFeelingMoves": [
+    "your competitors are already winning and you are falling behind",
+    "AI will make you invisible unless you act now",
+    "secret GEO hacks",
+    "single proprietary score presented as objective truth",
+    "countdown urgency or scarcity unrelated to real capacity",
+    "hiding lower-cost substitutes"
+  ]
+}
