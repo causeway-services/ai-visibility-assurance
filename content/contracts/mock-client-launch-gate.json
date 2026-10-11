@@ -1,0 +1,22 @@
+{
+  "id": "mock-client-launch-gate",
+  "type": "market-launch-gate",
+  "enterprise": "ai-visibility-assurance",
+  "state": "closed",
+  "mockClient": "Morgan Sennhauser",
+  "permitsExternalSolicitation": false,
+  "permitsExternalPayment": false,
+  "permitsMockFulfillment": true,
+  "openingCondition": "Morgan completes an end-to-end mock-client cycle and explicitly states that the offer, intake, fulfillment, evidence, delivery, and acceptance experience is ready to expose to external buyers.",
+  "requiredEvidence": [
+    "mock-client journey transcript or structured observations",
+    "resolved or explicitly accepted objections",
+    "measured fulfillment effort and marginal tool cost",
+    "inspectable sample deliverable",
+    "clear comparison with cheaper subscription and self-service alternatives",
+    "payment/refund/correction handling",
+    "privacy and retention statement",
+    "launch price decision"
+  ],
+  "failClosed": true
+}
