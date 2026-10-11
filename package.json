@@ -1,0 +1,10 @@
+{
+  "name": "@causeway/ai-visibility-assurance",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "node --check src/offer-state-machine.mjs",
+    "test": "node --test test"
+  }
+}
