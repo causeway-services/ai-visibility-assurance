@@ -1,0 +1,22 @@
+{
+  "id": "ai-visibility-assurance",
+  "name": "AI Visibility Assurance",
+  "kind": "incubating",
+  "faces": "organizations and operators deciding whether AI-mediated discovery or representation is materially failing them and what, if anything, is worth spending to change",
+  "bundle": "ai-visibility-assurance",
+  "package": "@causeway/ai-visibility-assurance",
+  "roster": "content/offices",
+  "contracts": [
+    "mock-client-launch-gate",
+    "ai-visibility-audit"
+  ],
+  "executiveBoundary": "Public Services operates the service; enterprise-level public strategy and public commitments remain with the distinct CPO/authorized executive receiver.",
+  "launchState": "private-mock-client-qa",
+  "externalSolicitationAuthorized": false,
+  "externalPaymentAuthorized": false,
+  "x-provenance": {
+    "recovered-from": "causeway-services/public-services-section#6",
+    "recovered-on": "2026-10-06",
+    "state": "incubating; historical role/persona bindings intentionally not promoted without fresh office readback"
+  }
+}
