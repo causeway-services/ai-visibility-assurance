@@ -1,0 +1,47 @@
+{
+  "id": "ai-visibility-assurance-offer-ladder",
+  "status": "hypotheses-not-launch-prices",
+  "principle": "Monetize resolved uncertainty and evidence, not fear or mandatory continuity.",
+  "candidates": [
+    {
+      "tier": "triage",
+      "priceHypothesis": "free",
+      "outcome": "Determine whether there is enough plausible material risk or uncertainty to justify deeper measurement.",
+      "continuation": "May recommend stop, self-service, existing provider, snapshot, or full audit."
+    },
+    {
+      "tier": "snapshot",
+      "priceHypothesis": "low-cost one-time; amount unvalidated",
+      "outcome": "Small fixed query set and entity/crawl baseline with automated evidence capture and limited interpretation.",
+      "whyExists": "Creates a credible alternative for buyers who correctly reject a USD 500 audit as excessive."
+    },
+    {
+      "tier": "independent-audit",
+      "priceHypothesis": "USD 500 provisional",
+      "outcome": "Evidence-led multi-stage diagnosis, substitute comparison, commercial relevance, and prioritized least-cost recommendation.",
+      "differentiation": "Independent decision/QA layer rather than another continuous ranking dashboard."
+    },
+    {
+      "tier": "monitoring",
+      "priceHypothesis": "optional recurring; amount and cadence unvalidated",
+      "outcome": "Repeat an accepted measurement protocol to detect meaningful changes.",
+      "rule": "Never recommend merely to create subscription revenue; recurring value must depend on a plausible rate of change."
+    },
+    {
+      "tier": "agency-assurance",
+      "priceHypothesis": "B2B/white-label or portfolio pricing unvalidated",
+      "outcome": "Independent baseline and post-change QA for agencies that perform GEO/AEO/SEO implementation.",
+      "differentiation": "Complements implementers by separating intervention from measurement."
+    }
+  ],
+  "costModelToMeasure": [
+    "agent/model inference",
+    "web/search/tool access",
+    "human mock-client/reviewer time",
+    "operator exception handling",
+    "surface-specific observation labor",
+    "report generation and correction",
+    "payment fees",
+    "customer support"
+  ]
+}
