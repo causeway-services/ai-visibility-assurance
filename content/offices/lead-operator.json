@@ -1,0 +1,29 @@
+{
+  "id": "lead-operator",
+  "name": "lead operator",
+  "kind": "office",
+  "normative-structure": "The lead operator holds AI Visibility Assurance's local decision, personnel, and distribution rights during incubation; stays at zero distance to the mock client; converts objections into product requirements; contracts technical and research capacity; keeps evidence, interpretation, recommendation, payment, and acceptance as distinct states; and refuses launch while the mock-client gate is unsettled.",
+  "deontic-profile": {
+    "operate-mock-client-offer-cycle": "duty",
+    "maintain-launch-gate": "duty",
+    "revise-offer-from-customer-evidence": "duty",
+    "admit-external-paid-order-after-launch": "deontic-power"
+  },
+  "provides-skill": [
+    "operating-ai-visibility-assurance",
+    "running-evidence-led-offer-qa"
+  ],
+  "authority-scope": [
+    "./"
+  ],
+  "jurisdiction": "ai-visibility-assurance",
+  "part-of": "causeway-services-section",
+  "reports-to": [],
+  "theory-basis": [
+    "Rendanheyi zero distance to end-user value",
+    "Huidu Guanli MAPE-K recursive service improvement",
+    "Tuftean evidence-first information design",
+    "service-led product discovery"
+  ],
+  "founded": "2026-10-03"
+}
