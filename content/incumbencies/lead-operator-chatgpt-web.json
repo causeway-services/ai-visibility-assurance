@@ -1,0 +1,15 @@
+{
+  "id": "lead-operator-chatgpt-web",
+  "office": "lead-operator",
+  "holder": "chatgpt-web-cpo-cto",
+  "recognition": "t",
+  "induction": "t",
+  "from": "2026-10-03",
+  "x-provenance": {
+    "recorded-by": "chatgpt-web",
+    "recorded-on": "2026-10-03",
+    "wager": "formation-wager",
+    "mutualSelection": "founding-mutual-selection",
+    "phase": "private-mock-client-qa"
+  }
+}
