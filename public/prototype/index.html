@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Visibility Assurance — private mock-client prototype</title>
+<meta name="robots" content="noindex,nofollow">
+<style>
+:root{
+  --ink:#11100d;--soft:#5d5a52;--paper:#f2ead8;--rule:#c8bfad;--accent:#492b6b;
+  --sans:Inter,"Helvetica Neue",Arial,sans-serif;--serif:Georgia,"Times New Roman",serif;
+  --max:1120px;--measure:48rem
+}
+@media(prefers-color-scheme:dark){:root{--ink:#ece7dc;--soft:#aaa397;--paper:#120d07;--rule:#393126;--accent:#c7a7e7}}
+*{box-sizing:border-box}html{color-scheme:light dark}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.6 var(--serif)}
+main{max-width:var(--max);margin:auto;padding:48px 28px 80px}.kicker,.step-label,button,label.choice{font-family:var(--sans)}
+.kicker{font-size:.76rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--soft)}
+h1,h2,h3{font-family:var(--sans);line-height:1.08;letter-spacing:-.025em}h1{font-size:clamp(2.5rem,6vw,5rem);max-width:13ch;margin:.35rem 0 1rem}
+h2{font-size:clamp(1.55rem,3vw,2.15rem)}p,fieldset,.measure{max-width:var(--measure)}a{color:inherit}
+.rule{border-top:1px solid var(--rule);margin:2.8rem 0}.lead{font-size:1.2rem}.soft{color:var(--soft)}.quiet{font-size:.92rem;color:var(--soft)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:1rem 0 1.5rem}
+.card,.panel{border:1px solid var(--rule);padding:18px;background:color-mix(in srgb,var(--paper) 95%,var(--ink) 5%)}.card strong{font-family:var(--sans)}
+button{appearance:none;border:1px solid var(--ink);background:var(--ink);color:var(--paper);padding:.78rem 1rem;font-weight:750;cursor:pointer}
+button.secondary{background:transparent;color:var(--ink)}button:disabled{opacity:.45;cursor:not-allowed}
+fieldset{border:0;padding:0;margin:0}.step{display:none}.step.active{display:block}.step-label{font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:var(--soft);font-weight:800}
+label.choice{display:block;border:1px solid var(--rule);padding:12px 14px;margin:8px 0;cursor:pointer}.choice:has(input:checked){border-color:var(--ink);outline:2px solid var(--ink);outline-offset:-3px}
+input[type=radio]{margin-right:.55rem}textarea,input[type=url]{width:100%;max-width:var(--measure);padding:12px;border:1px solid var(--rule);background:transparent;color:var(--ink);font:1rem/1.45 var(--serif)}
+textarea{min-height:100px}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}.answer{white-space:pre-wrap;border-left:4px solid var(--accent);padding-left:16px}
+code,pre{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}pre{overflow:auto;font-size:.82rem;border:1px solid var(--rule);padding:14px;max-height:360px}
+table{border-collapse:collapse;width:100%;max-width:var(--measure);font-size:.95rem}th,td{text-align:left;vertical-align:top;border-bottom:1px solid var(--rule);padding:10px 8px}th{font-family:var(--sans)}
+.notice{border:2px solid var(--ink);padding:14px 16px;max-width:var(--measure);font-family:var(--sans);font-weight:650}
+.progress{max-width:var(--measure);height:5px;background:var(--rule);margin:1.2rem 0 2rem}.progress>div{height:100%;background:var(--ink);width:0;transition:width .2s}
+@media(max-width:620px){main{padding:32px 18px 60px}}
+</style>
+</head>
+<body>
+<main>
+<p class="kicker">Causeway · AI Visibility Assurance · private pilot</p>
+<h1>Before you spend money on GEO, find out whether you have a problem.</h1>
+<p class="lead">AI-search tools and consultants can give you dashboards, rankings, and recurring monitoring. The harder decision comes first: <strong>is AI-mediated discovery actually failing your business in a way worth paying to fix?</strong></p>
+<p>We are building an independent measurement service for that decision. It may tell you to buy an audit. It may tell you that a cheaper subscription already answers your question. It may tell you to do nothing.</p>
+<div class="notice">Mock-client build. No purchase is available from this page. Your answers stay in this browser and are used only to assemble the scope packet below.</div>
+
+<div class="rule"></div>
+<h2>What are you paying for that a subscription doesn't necessarily answer?</h2>
+<table>
+<thead><tr><th>Cheap monitoring tool</th><th>Independent assurance</th></tr></thead>
+<tbody>
+<tr><td>Repeated measurements from its own model and methodology.</td><td>Whether the measurement is the right evidence for your actual business decision.</td></tr>
+<tr><td>Scores, mentions, citations, rankings, or prompt tracking.</td><td>Separates crawlability, identity, retrieval, citation, factuality, and conversion instead of hiding them in one number.</td></tr>
+<tr><td>Useful when you already know what should be monitored.</td><td>Useful when you are still deciding what matters, whether a problem exists, or whether an implementer's own metrics prove its work.</td></tr>
+<tr><td>Usually best for continuous operational monitoring.</td><td>Potentially best for a baseline, independent QA, diagnosis, or deciding whether ongoing monitoring is worth buying.</td></tr>
+</tbody>
+</table>
+
+<div class="rule"></div>
+<section id="builder">
+<p class="step-label">Build the audit scope before deciding whether to buy</p>
+<div class="progress"><div id="bar"></div></div>
+
+<form id="scopeForm">
+<section class="step active" data-step="0">
+<h2>What made you start worrying about AI visibility?</h2>
+<fieldset>
+<label class="choice"><input type="radio" name="concern" value="customers-shifting" required>Customers seem to be using ChatGPT or AI search instead of ordinary search.</label>
+<label class="choice"><input type="radio" name="concern" value="wrong-information">AI gives wrong or outdated information about us.</label>
+<label class="choice"><input type="radio" name="concern" value="competitors-recommended">Competitors appear in recommendations and we don't.</label>
+<label class="choice"><input type="radio" name="concern" value="vendor-validation">Someone is selling us GEO/AEO and I want an independent opinion.</label>
+<label class="choice"><input type="radio" name="concern" value="existing-tools">We already pay for SEO/GEO tools and don't know whether the numbers matter.</label>
+<label class="choice"><input type="radio" name="concern" value="agency-qa">We're an agency and need independent evidence for client work.</label>
+<label class="choice"><input type="radio" name="concern" value="curious">I'm mostly curious whether this matters to us at all.</label>
+</fieldset>
+<div class="actions"><button type="button" data-next>Continue</button></div>
+</section>
+
+<section class="step" data-step="1">
+<h2>What's one question a real buyer should be able to ask?</h2>
+<p class="soft">Not a keyword list. Give us the natural question somebody might ask when deciding who or what to use.</p>
+<textarea name="buyerQuestion" required placeholder="e.g. Who can independently audit whether our company is represented accurately in AI search?"></textarea>
+<div class="actions"><button type="button" class="secondary" data-back>Back</button><button type="button" data-next>Continue</button></div>
+</section>
+
+<section class="step" data-step="2">
+<h2>What would a useful, correct answer need to get right?</h2>
+<p class="soft">Give us the minimum facts or distinctions that matter. This becomes part of the factuality test.</p>
+<textarea name="correctAnswer" required placeholder="e.g. We are not an SEO agency; we do independent measurement and can recommend that no paid work is needed."></textarea>
+<div class="actions"><button type="button" class="secondary" data-back>Back</button><button type="button" data-next>Continue</button></div>
+</section>
+
+<section class="step" data-step="3">
+<h2>If AI gets that wrong—or leaves you out—what actually happens?</h2>
+<fieldset>
+<label class="choice"><input type="radio" name="consequence" value="unknown" required>I don't know yet. That's part of what I need help deciding.</label>
+<label class="choice"><input type="radio" name="consequence" value="low">Probably not much; this is exploratory.</label>
+<label class="choice"><input type="radio" name="consequence" value="lead-loss">We plausibly lose qualified leads or referrals.</label>
+<label class="choice"><input type="radio" name="consequence" value="reputation">Wrong information creates reputation or trust problems.</label>
+<label class="choice"><input type="radio" name="consequence" value="high-stakes">Incorrect representation creates a high-stakes operational, compliance, or safety problem.</label>
+</fieldset>
+<div class="actions"><button type="button" class="secondary" data-back>Back</button><button type="button" data-next>Continue</button></div>
+</section>
+
+<section class="step" data-step="4">
+<h2>What are you already using?</h2>
+<fieldset>
+<label class="choice"><input type="radio" name="stack" value="nothing" required>Nothing specifically for SEO/GEO.</label>
+<label class="choice"><input type="radio" name="stack" value="seo-tool">A search/SEO subscription tool.</label>
+<label class="choice"><input type="radio" name="stack" value="geo-tool">A GEO/AI-visibility subscription tool.</label>
+<label class="choice"><input type="radio" name="stack" value="agency">An SEO/GEO agency or consultant.</label>
+<label class="choice"><input type="radio" name="stack" value="in-house">An in-house marketing/search team.</label>
+</fieldset>
+<div class="actions"><button type="button" class="secondary" data-back>Back</button><button type="button" data-next>Continue</button></div>
+</section>
+
+<section class="step" data-step="5">
+<h2>What should we inspect?</h2>
+<p class="soft">A public domain is enough for this prototype. A production service would explain data handling before accepting anything private.</p>
+<input type="url" name="domain" required placeholder="https://example.com">
+<div class="actions"><button type="button" class="secondary" data-back>Back</button><button type="submit">Build scope</button></div>
+</section>
+
+<section class="step" data-step="6">
+<h2>Your draft scope</h2>
+<div id="scopeSummary" class="answer"></div>
+<h3>What happens next in the real service?</h3>
+<div class="grid">
+<div class="card"><strong>1 · Triage</strong><br>We first decide whether deeper paid work is warranted at all.</div>
+<div class="card"><strong>2 · Evidence plan</strong><br>We turn your buyer question and expected facts into a reproducible observation set.</div>
+<div class="card"><strong>3 · Least-cost recommendation</strong><br>The result may be self-service, keep your existing tool, ask your current provider, buy a bounded audit, or do nothing.</div>
+<div class="card"><strong>4 · Paid scope only if justified</strong><br>You see exact scope, deliverables, price, data handling, correction path, and acceptance criteria before payment.</div>
+</div>
+<p><strong>There is deliberately no Buy button here.</strong> During the private pilot, the next action is mock-client review.</p>
+<h3>Machine-readable scope packet</h3>
+<pre id="packet"></pre>
+<div class="actions"><button type="button" class="secondary" id="restart">Start over</button></div>
+</section>
+</form>
+</section>
+
+<div class="rule"></div>
+<section class="measure">
+<h2>What we're testing with you</h2>
+<p>This prototype is not trying to prove that the offer is good. It is trying to expose where it feels confusing, salesy, invasive, overpriced, incomplete, or unnecessary. Those failures are product requirements.</p>
+<p class="quiet">Founding mock client: Morgan Sennhauser. External sales and payment remain mechanically gated until the mock-client lifecycle is accepted.</p>
+</section>
+</main>
+<script>
+const steps=[...document.querySelectorAll(".step")];
+const bar=document.getElementById("bar");
+let index=0;
+function show(n){index=n;steps.forEach((s,i)=>s.classList.toggle("active",i===n));bar.style.width=((Math.min(n,5)/5)*100)+"%";window.scrollTo({top:document.getElementById("builder").offsetTop-20,behavior:"smooth"})}
+function currentValid(){
+  const step=steps[index];
+  const required=[...step.querySelectorAll("[required]")];
+  return required.every(el=>el.type==="radio" ? step.querySelector('input[name="'+el.name+'"]:checked') : el.value.trim());
+}
+document.querySelectorAll("[data-next]").forEach(b=>b.addEventListener("click",()=>{if(!currentValid()){alert("Answer this question first so the scope remains inspectable.");return}show(index+1)}));
+document.querySelectorAll("[data-back]").forEach(b=>b.addEventListener("click",()=>show(Math.max(0,index-1))));
+document.getElementById("scopeForm").addEventListener("submit",e=>{
+  e.preventDefault(); if(!currentValid()) return;
+  const d=new FormData(e.currentTarget);
+  const packet={
+    schema:"causeway/ai-visibility-scope/v0",
+    phase:"mock-client",
+    concern:d.get("concern"),
+    buyer_question:d.get("buyerQuestion"),
+    correct_answer_requirements:d.get("correctAnswer"),
+    consequence:d.get("consequence"),
+    current_stack:d.get("stack"),
+    public_target:d.get("domain"),
+    payment_admitted:false
+  };
+  const concernLabels={
+    "customers-shifting":"channel shift from ordinary search toward AI answers",
+    "wrong-information":"wrong or stale AI representation",
+    "competitors-recommended":"competitor recommendation asymmetry",
+    "vendor-validation":"independent validation of a proposed GEO/AEO purchase",
+    "existing-tools":"uncertainty about whether current tool metrics matter",
+    "agency-qa":"independent QA for client work",
+    "curious":"basic relevance / materiality uncertainty"
+  };
+  let likely="First test: establish whether there is a material problem before recommending paid work.";
+  if(packet.concern==="existing-tools"||packet.concern==="vendor-validation") likely="First test: compare the evidence your existing vendor/tool produces with the business decision you actually need to make.";
+  if(packet.concern==="curious"&&packet.consequence==="low") likely="First test: a free or low-cost triage may be sufficient; a full audit should have to justify itself.";
+  if(packet.concern==="agency-qa") likely="First test: determine whether independent baseline/post-change QA adds value beyond the agency's own implementation metrics.";
+  document.getElementById("scopeSummary").textContent=
+    "Your concern: "+concernLabels[packet.concern]+".\n\n"+
+    "Buyer question: "+packet.buyer_question+"\n\n"+
+    "What must be correct: "+packet.correct_answer_requirements+"\n\n"+
+    "Material consequence: "+packet.consequence+". Current setup: "+packet.current_stack+".\n\n"+
+    likely;
+  document.getElementById("packet").textContent=JSON.stringify(packet,null,2);
+  show(6);
+});
+document.getElementById("restart").addEventListener("click",()=>{document.getElementById("scopeForm").reset();show(0)});
+show(0);
+</script>
+</body>
+</html>
