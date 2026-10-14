@@ -1,0 +1,19 @@
+{
+  "id": "founding-mutual-selection",
+  "type": "RendanheyiMutualSelection",
+  "enterprise": "ai-visibility-assurance",
+  "office": "lead-operator",
+  "constituency": "founding-member-and-mock-client",
+  "candidate": "chatgpt-web-cpo-cto",
+  "foundingMemberSelection": "selected",
+  "candidateAcceptance": "accepted",
+  "wager": "formation-wager",
+  "revocable": true,
+  "approvalFromAbove": false,
+  "evidence": {
+    "userDirective": "invest more in doing this as a real micro-enterprise under Causeway",
+    "userQualityConstraint": "Morgan Sennhauser must act as mock client and approve the pipeline before faster external sales",
+    "currentCommercialBoundary": "USD 500 checkout disabled during private pilot"
+  },
+  "rule": "The operator holds local execution authority for formation and QA, while launch to external paid customers remains a customer-acceptance condition of the founding wager rather than a standing permission to sell."
+}
