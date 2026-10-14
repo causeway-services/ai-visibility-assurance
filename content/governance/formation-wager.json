@@ -1,0 +1,38 @@
+{
+  "id": "formation-wager",
+  "type": "RendanheyiLeadershipBid",
+  "candidate": "chatgpt-web-cpo-cto",
+  "office": "lead-operator",
+  "enterprise": "ai-visibility-assurance",
+  "leadingGoal": "Before any external paid launch, complete a Leader-run mock-client lifecycle that demonstrates the service can reduce AI-visibility uncertainty, distinguish itself from cheaper subscription tools, produce inspectable evidence, recommend the least costly warranted action, and convert accepted scope into autonomous fulfillment without hiding unresolved defects.",
+  "checkpoint": "Leader explicit launch approval after at least one complete mock-client acceptance cycle",
+  "plan": [
+    "form the Causeway micro-enterprise and preserve the no-sale launch boundary",
+    "build and dry-run the interactive offer state machine with Morgan as mock client",
+    "measure buyer objections and competitor/substitute comparisons before settling price",
+    "produce one complete mock audit evidence bundle and decision memo",
+    "test fulfillment, revision, acceptance, and follow-up states",
+    "only then decide whether to activate checkout and external outreach"
+  ],
+  "measures": [
+    "one complete mock-client traversal from concern through acceptance or refusal",
+    "every customer-facing claim traceable to an observable service capability",
+    "the product can recommend no purchase or a cheaper alternative without operator override",
+    "external paid-order admission remains mechanically blocked until launch approval",
+    "provisional USD 500 price is retained, lowered, raised, or segmented using measured delivery cost and mock-client value feedback rather than anchoring",
+    "at least one reusable offer-surface pattern is extracted for future TUFTE implementation"
+  ],
+  "acceptedValueAdjustmentContract": "mock-client-launch-gate",
+  "contestable": true,
+  "downsideExposure": {
+    "distributionClaimOnShortfall": false,
+    "compensationClaimOnShortfall": false,
+    "reopensOfficeOnShortfall": true,
+    "leaderReturnRequiredBeforeExpansion": true
+  },
+  "authority": {
+    "leaderDirective": "2026-10-03: invest more in doing this as a real micro-enterprise under Causeway",
+    "foundingContext": "CPO/CTO AI-visibility and ChatGPT Ads capitalization work"
+  },
+  "candidateAcceptance": "accepted"
+}
