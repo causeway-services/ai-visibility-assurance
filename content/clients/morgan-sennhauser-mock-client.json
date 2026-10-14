@@ -1,0 +1,25 @@
+{
+  "id": "morgan-sennhauser-mock-client",
+  "type": "mock-client",
+  "role": "founding product-quality customer",
+  "authority": "may block external launch",
+  "paymentRequired": false,
+  "currentFeedback": [
+    {
+      "observedAt": "2026-10-03",
+      "finding": "Initial offer immediately raised comparison with cheaper subscription services.",
+      "implication": "Offer must explain why independent decision support differs from continuous dashboards and must surface cheaper substitutes."
+    },
+    {
+      "observedAt": "2026-10-03",
+      "finding": "Initial offer did not match the audience's feeling rules.",
+      "implication": "Front door must begin with uncertainty, skepticism, and buyer concern rather than technical AEO/GEO stages."
+    },
+    {
+      "observedAt": "2026-10-03",
+      "finding": "Each offer should be its own interactive HTML service surface with integrated payment and autonomous downstream fulfillment.",
+      "implication": "Offer architecture must become a reusable application/state-machine pattern suitable for eventual TUFTE extraction."
+    }
+  ],
+  "nextMockStep": "Run the concern-to-scope interactive flow conversationally and compare the experience with the HTML prototype."
+}
