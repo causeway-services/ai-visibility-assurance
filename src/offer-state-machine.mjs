@@ -28,6 +28,59 @@ const NEXT = Object.freeze({
   closed: new Set(),
 });
 
+const REQUIRED_TIERS = Object.freeze([
+  "triage", "snapshot", "independent-audit", "monitoring", "agency-assurance",
+]);
+
+/**
+ * A source-owned product hypothesis readout, not a price, contract, offer,
+ * payment authorization or AI-search measurement. The source document is
+ * supplied by the caller that actually read its original bytes.
+ */
+export function projectOfferChoices(ladder) {
+  if (!ladder || typeof ladder !== "object" || Array.isArray(ladder) ||
+      ladder.id !== "ai-visibility-assurance-offer-ladder" ||
+      ladder.status !== "hypotheses-not-launch-prices" ||
+      !Array.isArray(ladder.candidates) ||
+      ladder.candidates.length !== REQUIRED_TIERS.length) {
+    throw new TypeError("AI Visibility offer ladder must be the original hypothesis-only catalog");
+  }
+  const seen = new Set();
+  const choices = ladder.candidates.map(candidate => {
+    const strings = ["tier", "priceHypothesis", "outcome"];
+    if (!candidate || typeof candidate !== "object" || Array.isArray(candidate) ||
+        strings.some(key => typeof candidate[key] !== "string" ||
+          candidate[key].trim() !== candidate[key] || candidate[key].length === 0 ||
+          candidate[key].length > 1000) ||
+        !REQUIRED_TIERS.includes(candidate.tier) || seen.has(candidate.tier)) {
+      throw new TypeError("invalid, missing or duplicated offer hypothesis tier");
+    }
+    seen.add(candidate.tier);
+    if (candidate.tier === "triage" && candidate.priceHypothesis !== "free") {
+      throw new TypeError("the original free triage may not become a paid offer");
+    }
+    return Object.freeze({
+      tier: candidate.tier,
+      outcome: candidate.outcome,
+      priceHypothesis: candidate.priceHypothesis,
+      paymentAllowed: false,
+      ...(candidate.continuation ? { continuation: candidate.continuation } : {}),
+      ...(candidate.whyExists ? { whyExists: candidate.whyExists } : {}),
+      ...(candidate.differentiation ? { differentiation: candidate.differentiation } : {}),
+      ...(candidate.rule ? { rule: candidate.rule } : {}),
+    });
+  });
+  return Object.freeze({
+    kind: "causeway.ai-visibility.mock-offer-choices/v1",
+    source: ladder.id,
+    sourceStatus: ladder.status,
+    pricesApproved: false,
+    paymentAuthorized: false,
+    customerSelectionMade: false,
+    candidates: Object.freeze(choices),
+  });
+}
+
 export function transition(order, to, context = {}) {
   if (!order || typeof order !== "object") throw new TypeError("order is required");
   if (!STATES.includes(order.state)) throw new TypeError("unknown current state");
@@ -59,6 +112,8 @@ export function transition(order, to, context = {}) {
   return Object.freeze({
     ...order,
     state: to,
+    ...(to === "decide" && context.offerLadder !== undefined
+      ? { offerChoices: projectOfferChoices(context.offerLadder) } : {}),
     history: Object.freeze([
       ...(order.history ?? []),
       Object.freeze({

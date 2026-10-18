@@ -48,3 +48,25 @@ The first framework-independent HTML prototype lives at
 `public/prototype/index.html`. The repeated pattern is a candidate input
 to the future Tiling User Form Topology Engine (TUFTE); this repository does
 not pretend that engine is already implemented.
+
+## Use the source-owned offer ladder in the private prototype
+
+The five unvalidated service tiers live only in `content/economics/offer-ladder.json`.
+The existing `src/offer-state-machine.mjs` reads them as mock-client decision options,
+not launch prices, order authority, or current capability evidence.
+
+From this service directory, run:
+
+    npm run build:mock-prototype -- --output /absolute/path/private-prototype.html
+
+The command consumes the canonical JSON and `public/prototype/index.html`, projects
+all five options through the existing state machine, escapes HTML text and
+records a SHA-256 of exactly the catalog bytes observed. Its output is create-only
+(wx, mode 0600); it cannot overwrite the original template or an earlier preview.
+Opening this local HTML is a private mock-client experience, not a publication,
+checkout, customer order, accepted price, provider contract, or TUFTE installation.
+
+`npm test` covers source consumption, two valid option orders, malformed
+or duplicate catalogs, escaped content, create-only materialization and refusals.
+Publication and any real paid purchase require the original separate
+mock-client acceptance, authorization, release and independent receiving.

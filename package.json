@@ -4,7 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "check": "node --check src/offer-state-machine.mjs",
-    "test": "node --test test"
+    "check": "node --check src/offer-state-machine.mjs && node --check scripts/build-mock-prototype.mjs",
+    "test": "node --test test/*.test.mjs",
+    "build:mock-prototype": "node scripts/build-mock-prototype.mjs"
   }
 }
