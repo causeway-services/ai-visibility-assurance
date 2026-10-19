@@ -49,6 +49,33 @@ The first framework-independent HTML prototype lives at
 to the future Tiling User Form Topology Engine (TUFTE); this repository does
 not pretend that engine is already implemented.
 
+The original `content/product/offer-surface-contract.json` was an unused
+private proposal whose nine UI stages diverged from the twelve actual runtime
+states and transitions in `src/offer-state-machine.mjs`. The authoritative
+*Causeway instance flow* is now [`content/product/offer-flow.scxml`](content/product/offer-flow.scxml),
+a **W3C SCXML 1.0** statechart. Its `state`, `final` and `transition` elements
+represent the twelve actual runtime stages and seventeen existing transition
+edges. The original nine customer questions, conditional paid-stage marker,
+original contract identity, status, purpose, component ideas, constraints and
+candidate TUFTE interface are carried unchanged as literal JSON values in
+standard ECMAScript `datamodel/data` elements; no meaningful old field was
+lost. Original JSON Git blob `e4a7132aa8e73793e832f56c8ee4344a2ec850da`
+remains recoverable in history, rather than retained as an active parallel
+truth. The earlier parent Public Services proposal snapshot remains historical
+and is not promoted into a second active source.
+
+The *actual source owner* is this Causeway product. The bounded **Engineering
+consumer** is the original `@red-cup-engineering/xml-document-rendering-service`
+`./scxml-atomic-graph` projection proposed at candidate version `0.2.0`;
+it reuses the original XML 1.0/Namespaces reader and admits a narrow, strict
+SCXML atomic subset. It is not an executable full-SCXML interpreter. The real
+`transition` application now uses that source graph instead of another
+hardcoded `STATES`/`NEXT` map, and separately retains the existing
+mock-client, external-launch, payment, evidence and customer-acceptance gates.
+SCXML's presence, a stage named `buy`, and an eventual `launchGate`
+argument do **not** approve a sale, authorize payment or make a price live.
+
+
 ## Use the source-owned offer ladder in the private prototype
 
 The five unvalidated service tiers live only in `content/economics/offer-ladder.json`.
@@ -59,9 +86,11 @@ From this service directory, run:
 
     npm run build:mock-prototype -- --output /absolute/path/private-prototype.html
 
-The command consumes the canonical JSON and `public/prototype/index.html`, projects
-all five options through the existing state machine, escapes HTML text and
-records a SHA-256 of exactly the catalog bytes observed. Its output is create-only
+The command consumes the canonical five-tier JSON *and the standard SCXML statechart*
+through the existing state machine, plus `public/prototype/index.html`. It
+projects the five nonpayable choices **and the nine actually authored customer
+stage questions** into the private HTML, escapes text and records SHA-256
+identities of the exact option and SCXML bytes loaded. Its output is create-only
 (wx, mode 0600); it cannot overwrite the original template or an earlier preview.
 Opening this local HTML is a private mock-client experience, not a publication,
 checkout, customer order, accepted price, provider contract, or TUFTE installation.
