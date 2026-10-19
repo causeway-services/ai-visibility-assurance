@@ -7,5 +7,9 @@
     "check": "node --check src/offer-state-machine.mjs && node --check scripts/build-mock-prototype.mjs",
     "test": "node --test test/*.test.mjs",
     "build:mock-prototype": "node scripts/build-mock-prototype.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/causeway-services/ai-visibility-assurance.git"
   }
 }
