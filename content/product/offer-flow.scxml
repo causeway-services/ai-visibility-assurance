@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Causeway instance data; W3C SCXML 1.0 topology, not a payment authorization or a full SCXML processor. -->
+<scxml xmlns="http://www.w3.org/2005/07/scxml" version="1.0" datamodel="ecmascript"
+       name="aiVisibilityAssuranceOfferFlow" initial="understand">
+  <datamodel>
+    <data id="contractIdentity">"causeway-offer-surface-v0"</data>
+    <data id="preparationState">"prototype-contract-for-tufte-extraction"</data>
+    <data id="purpose">"Represent one offer as an inspectable customer state machine whose UI, payment, fulfillment, evidence, delivery, and acceptance all project from the same durable service state."</data>
+    <data id="customerQuestions">{"understand":"What is this, and why might I care?","qualify":"Does my situation plausibly fit?","scope":"What exactly would you test or deliver?","decide":"Is paid work actually the least-cost next action?","buy":"What am I agreeing to and paying for?","fulfill":"What is happening with my accepted work?","inspect":"What evidence and deliverables did I receive?","accept":"Do I accept this, need a correction, or dispute scope?","follow_up":"Is there any warranted later action?"}</data>
+    <data id="conditionallyPayableStages">["buy"]</data>
+    <data id="commonComponents">["orientation block","progressive-disclosure question","evidence/explanation panel","substitute/alternative comparison","scope packet preview","price and contract panel","payment handoff","work-order status","deliverable/evidence viewer","revision request","acceptance receipt"]</data>
+    <data id="invariants">["UI state and durable service state must agree","payment cannot precede settled scope and launch admission","a lower-cost/no-purchase outcome must remain representable","fulfillment consumes the exact accepted scope packet rather than a separately retyped brief","delivery cites the evidence it interprets","acceptance and revision are explicit terminal/loop states rather than inferred from silence","every consequential transition emits a durable receipt"]</data>
+    <data id="candidateTuftePrimitive">{"name":"OfferFlow","input":"offer definition + customer state + transition guards + renderer bindings","output":"interactive HTML/application projection + machine-readable state + action receipts","warning":"TUFTE is not yet implemented in this repository; this is a candidate primitive extracted from a real offer."}</data>
+  </datamodel>
+  <state id="understand">
+    <transition event="advance.qualify" target="qualify"/>
+  </state>
+  <state id="qualify">
+    <transition event="advance.scope" target="scope"/>
+    <transition event="advance.triaged_out" target="triaged_out"/>
+  </state>
+  <state id="scope">
+    <transition event="advance.decide" target="decide"/>
+    <transition event="advance.triaged_out" target="triaged_out"/>
+  </state>
+  <state id="decide">
+    <transition event="advance.buy" target="buy"/>
+    <transition event="advance.fulfill" target="fulfill"/>
+    <transition event="advance.triaged_out" target="triaged_out"/>
+  </state>
+  <state id="buy">
+    <transition event="advance.fulfill" target="fulfill"/>
+  </state>
+  <state id="fulfill">
+    <transition event="advance.inspect" target="inspect"/>
+  </state>
+  <state id="inspect">
+    <transition event="advance.accept" target="accept"/>
+    <transition event="advance.revision_requested" target="revision_requested"/>
+  </state>
+  <state id="accept">
+    <transition event="advance.follow_up" target="follow_up"/>
+    <transition event="advance.closed" target="closed"/>
+  </state>
+  <state id="follow_up">
+    <transition event="advance.closed" target="closed"/>
+  </state>
+  <state id="triaged_out">
+    <transition event="advance.closed" target="closed"/>
+  </state>
+  <state id="revision_requested">
+    <transition event="advance.fulfill" target="fulfill"/>
+  </state>
+  <final id="closed"/>
+</scxml>
