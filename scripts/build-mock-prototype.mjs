@@ -3,7 +3,7 @@
 import { createHash } from "node:crypto";
 import { readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
-import { newOrder, transition } from "../src/offer-state-machine.mjs";
+import { newOrder, transition, FLOW_QUESTIONS, FLOW_SOURCE_DIGEST } from "../src/offer-state-machine.mjs";
 
 const LADDER = fileURLToPath(new URL("../content/economics/offer-ladder.json", import.meta.url));
 const TEMPLATE = fileURLToPath(new URL("../public/prototype/index.html", import.meta.url));
@@ -12,7 +12,7 @@ const htmlText = value => String(value).replace(/[&<>"']/gu, c =>
   ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
 
 /** The original offer-state-machine has already admitted these as nonpayable hypotheses. */
-export function renderMockOffers(template, choices, sourceDigest) {
+export function renderMockOffers(template, choices, sourceDigest, { flowQuestions = FLOW_QUESTIONS, flowDigest = FLOW_SOURCE_DIGEST } = {}) {
   if (typeof template !== "string" || template.split(MARK).length !== 2) {
     throw new TypeError("mock-client template needs exactly one offer insertion boundary");
   }
@@ -22,6 +22,27 @@ export function renderMockOffers(template, choices, sourceDigest) {
       !/^[a-f0-9]{64}$/u.test(sourceDigest)) {
     throw new TypeError("only five source-bound, nonpayable mock options may be rendered");
   }
+  if (!Array.isArray(flowQuestions) || flowQuestions.length === 0 ||
+      !/^[a-f0-9]{64}$/u.test(flowDigest) ||
+      flowQuestions.some(item => !item || typeof item.state !== "string" ||
+        typeof item.question !== "string" || !item.question.trim())) {
+    throw new TypeError("private mock flow must come from one qualified original SCXML source");
+  }
+  const steps = flowQuestions.map(item => {
+    const stage = htmlText(item.state.replaceAll("_", " "));
+    const question = htmlText(item.question);
+    return '<li><strong>' + stage + '</strong> — ' + question +
+      (item.conditionallyPayable
+        ? ' <em>(paid stage only after separately accepted scope and a real launch; unavailable in this private mock)</em>'
+        : '') + '</li>';
+  }).join("\n");
+  const flow = '<section id="source-offer-flow" data-flow-scxml-sha256="' + flowDigest + '">' +
+    '<h2>How the service progresses — authored W3C statechart</h2>' +
+    '<p>These are the original service questions and intended stages, not a published checkout or a promise of availability.</p>' +
+    '<ol>' + steps + '</ol>' +
+    '<p class="quiet">Original SCXML bytes SHA-256: ' + flowDigest +
+    '. A statechart cannot approve an offer, scope, payment, receipt or delivery.</p>' +
+    '</section>\n<div class="rule"></div>\n';
   const cards = choices.candidates.map(item => {
     if (item.paymentAllowed !== false || !item.tier || !item.outcome || !item.priceHypothesis) {
       throw new TypeError("incomplete or payable offer hypothesis");
@@ -37,7 +58,7 @@ export function renderMockOffers(template, choices, sourceDigest) {
     '<p class="quiet">Source-byte SHA-256: ' + sourceDigest +
     '. A digest does not prove Git custody, commercial authority, or service installation.</p>' +
     '</section>\n<div class="rule"></div>\n';
-  return template.replace(MARK, section + MARK);
+  return template.replace(MARK, section + flow + MARK);
 }
 
 export async function compileMockPrototype({ read = readFile } = {}) {
@@ -54,7 +75,9 @@ export async function compileMockPrototype({ read = readFile } = {}) {
   }
   return Object.freeze({
     html: renderMockOffers(template, order.offerChoices, digest),
-    sourceDigest: digest, candidateCount: order.offerChoices.candidates.length, paymentAuthorized: false,
+    sourceDigest: digest, flowSourceDigest: FLOW_SOURCE_DIGEST,
+    flowQuestionCount: FLOW_QUESTIONS.length,
+    candidateCount: order.offerChoices.candidates.length, paymentAuthorized: false,
   });
 }
 
@@ -64,6 +87,7 @@ export async function writeMockPrototype(output) {
   const built = await compileMockPrototype();
   await writeFile(output, built.html, { flag: "wx", mode: 0o600 });
   return Object.freeze({ output, sourceDigest: built.sourceDigest,
+    flowSourceDigest: built.flowSourceDigest, flowQuestionCount: built.flowQuestionCount,
     candidateCount: built.candidateCount, paymentAuthorized: false, publication: "not-performed" });
 }
 

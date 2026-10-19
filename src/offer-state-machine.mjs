@@ -1,32 +1,40 @@
-export const STATES = Object.freeze([
-  "understand",
-  "qualify",
-  "scope",
-  "decide",
-  "buy",
-  "fulfill",
-  "inspect",
-  "accept",
-  "follow_up",
-  "triaged_out",
-  "revision_requested",
-  "closed",
-]);
+/**
+ * The original Causeway offer author owns the W3C SCXML 1.0 instance graph.
+ * Red Cup XML Engineering reads its standard syntax and closed transition
+ * identities. This service continues to guard its own launch, payment,
+ * customer scope, rights, and acceptance independently of any SCXML label.
+ */
+import { readFileSync } from "node:fs";
+import { createHash } from "node:crypto";
+import { readAtomicScxmlGraph } from "@red-cup-engineering/xml-document-rendering-service/scxml-atomic-graph";
 
-const NEXT = Object.freeze({
-  understand: new Set(["qualify"]),
-  qualify: new Set(["scope", "triaged_out"]),
-  scope: new Set(["decide", "triaged_out"]),
-  decide: new Set(["buy", "fulfill", "triaged_out"]),
-  buy: new Set(["fulfill"]),
-  fulfill: new Set(["inspect"]),
-  inspect: new Set(["accept", "revision_requested"]),
-  revision_requested: new Set(["fulfill"]),
-  accept: new Set(["follow_up", "closed"]),
-  follow_up: new Set(["closed"]),
-  triaged_out: new Set(["closed"]),
-  closed: new Set(),
-});
+const FLOW_BYTES = readFileSync(new URL("../content/product/offer-flow.scxml", import.meta.url));
+const FLOW_TEXT = new TextDecoder("utf-8", { fatal: true }).decode(FLOW_BYTES);
+export const FLOW_SOURCE_DIGEST = createHash("sha256").update(FLOW_BYTES).digest("hex");
+export const OFFER_FLOW = readAtomicScxmlGraph(FLOW_TEXT);
+if (OFFER_FLOW.name !== "aiVisibilityAssuranceOfferFlow" ||
+    OFFER_FLOW.initial !== "understand" ||
+    OFFER_FLOW.data.preparationState !== "prototype-contract-for-tufte-extraction" ||
+    !Array.isArray(OFFER_FLOW.data.conditionallyPayableStages) ||
+    OFFER_FLOW.data.conditionallyPayableStages.length !== 1 ||
+    OFFER_FLOW.data.conditionallyPayableStages[0] !== "buy" ||
+    !OFFER_FLOW.states.some(state => state.id === "closed" && state.final) ||
+    OFFER_FLOW.states.filter(state => state.final).length !== 1) {
+  throw new TypeError("AI Visibility service refuses an unqualified SCXML flow or payment-stage claim");
+}
+const questions = OFFER_FLOW.data.customerQuestions;
+if (!questions || typeof questions !== "object" || Array.isArray(questions) ||
+    Object.entries(questions).some(([id, question]) =>
+      !OFFER_FLOW.states.some(state => state.id === id) ||
+      typeof question !== "string" || !question.trim())) {
+  throw new TypeError("AI Visibility SCXML must carry genuine customer questions for original states");
+}
+export const STATES = Object.freeze(OFFER_FLOW.states.map(state => state.id));
+export const FLOW_QUESTIONS = Object.freeze(Object.entries(questions).map(([state, question]) =>
+  Object.freeze({ state, question, conditionallyPayable: state === "buy" })));
+const NEXT = new Map(OFFER_FLOW.states.map(state => [
+  state.id, new Map(state.transitions.map(t => [t.event, t.target])),
+]));
 
 const REQUIRED_TIERS = Object.freeze([
   "triage", "snapshot", "independent-audit", "monitoring", "agency-assurance",
@@ -85,7 +93,9 @@ export function transition(order, to, context = {}) {
   if (!order || typeof order !== "object") throw new TypeError("order is required");
   if (!STATES.includes(order.state)) throw new TypeError("unknown current state");
   if (!STATES.includes(to)) throw new TypeError("unknown target state");
-  if (!NEXT[order.state].has(to)) throw new Error(`illegal transition: ${order.state} -> ${to}`);
+  if (NEXT.get(order.state)?.get(`advance.${to}`) !== to) {
+    throw new Error(`illegal transition: ${order.state} -> ${to}`);
+  }
 
   const isMock = order.client?.role === "mock-client";
   const launchOpen = context.launchGate === "open";
@@ -130,7 +140,7 @@ export function newOrder({ id, client, concern }) {
   if (!id || !client || !concern) throw new TypeError("id, client, and concern are required");
   return Object.freeze({
     id,
-    state: "understand",
+    state: OFFER_FLOW.initial,
     client: Object.freeze({ ...client }),
     concern,
     payment: Object.freeze({ state: client.role === "mock-client" ? "not-required" : "not-started" }),

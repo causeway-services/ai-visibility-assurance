@@ -11,5 +11,8 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/causeway-services/ai-visibility-assurance.git"
+  },
+  "dependencies": {
+    "@red-cup-engineering/xml-document-rendering-service": "0.2.0"
   }
 }
