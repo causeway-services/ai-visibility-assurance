@@ -5,9 +5,12 @@
  * customer scope, rights, and acceptance independently of any SCXML label.
  */
 import { readFileSync } from "node:fs";
+import { createHash } from "node:crypto";
 import { readAtomicScxmlGraph } from "@red-cup-engineering/xml-document-rendering-service/scxml-atomic-graph";
 
-const FLOW_TEXT = readFileSync(new URL("../content/product/offer-flow.scxml", import.meta.url), "utf8");
+const FLOW_BYTES = readFileSync(new URL("../content/product/offer-flow.scxml", import.meta.url));
+const FLOW_TEXT = new TextDecoder("utf-8", { fatal: true }).decode(FLOW_BYTES);
+export const FLOW_SOURCE_DIGEST = createHash("sha256").update(FLOW_BYTES).digest("hex");
 export const OFFER_FLOW = readAtomicScxmlGraph(FLOW_TEXT);
 if (OFFER_FLOW.name !== "aiVisibilityAssuranceOfferFlow" ||
     OFFER_FLOW.initial !== "understand" ||
