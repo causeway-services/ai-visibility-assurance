@@ -11,9 +11,9 @@
     },
     {
       "tier": "snapshot",
-      "priceHypothesis": "low-cost one-time; amount unvalidated",
-      "outcome": "Small fixed query set and entity/crawl baseline with automated evidence capture and limited interpretation.",
-      "whyExists": "Creates a credible alternative for buyers who correctly reject a USD 500 audit as excessive."
+      "priceHypothesis": "USD 195 one-time introductory quote hypothesis; not approved for payment or publication",
+      "outcome": "One public website, up to three real customer search questions, limited observable search/answer examples, crawl/entity/contact baseline, and a short human-readable decision with up to three practical corrections or a no-spend recommendation.",
+      "whyExists": "A small manually delivered first offer for buyer conversations at much less than the provisional USD 500 full audit. Quoting it requires neither an end-to-end autonomous checkout nor proof of uplift; binding orders remain held under the original mock-client launch gate."
     },
     {
       "tier": "independent-audit",
